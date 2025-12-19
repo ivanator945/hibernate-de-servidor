@@ -1,11 +1,7 @@
 package entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "asignaturas")
@@ -28,18 +24,13 @@ public class AsignaturasEntity {
 	@Column(name = "activo")
 	private int activo;
 
+	@OneToMany(mappedBy = "asignatura")
+	private List<FaltasEntity> faltas;
+
 	public AsignaturasEntity() {
 	}
 
 	public AsignaturasEntity(String nombre, String curso, double tasa, int activo) {
-		this.nombre = nombre;
-		this.curso = curso;
-		this.tasa = tasa;
-		this.activo = activo;
-	}
-
-	public AsignaturasEntity(int id, String nombre, String curso, double tasa, int activo) {
-		this.id = id;
 		this.nombre = nombre;
 		this.curso = curso;
 		this.tasa = tasa;
@@ -80,11 +71,5 @@ public class AsignaturasEntity {
 
 	public void setActivo(int activo) {
 		this.activo = activo;
-	}
-
-	@Override
-	public String toString() {
-		return "AsignaturasEntity [id=" + id + ", nombre=" + nombre + ", curso=" + curso + ", tasa=" + tasa
-				+ ", activo=" + activo + "]";
 	}
 }

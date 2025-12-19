@@ -9,36 +9,62 @@ import org.hibernate.query.Query;
 
 import dao.IDesplegableDAO;
 import dto.DesplegableDTO;
+import entities.AlumnoEntity;
+import entities.AsignaturasEntity;
+import entities.MunicipiosEntity;
 import utils.DBUtils;
 
 public class DesplegablesDAOImplHib implements IDesplegableDAO {
 
-	@Override
-	public ArrayList<DesplegableDTO> desplegableMunicipios() {
-		String hql = "SELECT new dto.DesplegableDTO(m.idMunicipio, m.nombre) FROM MunicipiosEntity m";
+    @Override
+    public ArrayList<DesplegableDTO> desplegableMunicipios() {
+        String hql = "SELECT new dto.DesplegableDTO(m.idMunicipio, m.nombre) FROM MunicipiosEntity m";
 
-		SessionFactory factory = DBUtils.creadorSessionFactory();
-		Session s = factory.getCurrentSession();
-		s.beginTransaction();
+        SessionFactory factory = DBUtils.creadorSessionFactory();
+        Session s = factory.getCurrentSession();
+        s.beginTransaction();
 
-		Query<DesplegableDTO> query = s.createQuery(hql, DesplegableDTO.class);
-		List<DesplegableDTO> lista = query.getResultList();
+        Query<DesplegableDTO> query = s.createQuery(hql, DesplegableDTO.class);
+        List<DesplegableDTO> lista = query.getResultList();
 
-		s.close();
+        s.getTransaction().commit();
+        s.close();
 
-		return new ArrayList<>(lista);
-	}
+        return new ArrayList<>(lista);
+    }
 
-	@Override
-	public ArrayList<DesplegableDTO> desplegableAlumnos() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    @Override
+    public ArrayList<DesplegableDTO> desplegableAlumnos() {
+        String hql = "SELECT new dto.DesplegableDTO(a.id, a.nombre) FROM AlumnoEntity a WHERE a.activo = 1";
 
-	@Override
-	public ArrayList<DesplegableDTO> desplegableAsignaturas() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+        SessionFactory factory = DBUtils.creadorSessionFactory();
+        Session s = factory.getCurrentSession();
+        s.beginTransaction();
+
+        Query<DesplegableDTO> query = s.createQuery(hql, DesplegableDTO.class);
+        List<DesplegableDTO> lista = query.getResultList();
+
+        s.getTransaction().commit();
+        s.close();
+
+        return new ArrayList<>(lista);
+    }
+
+    @Override
+    public ArrayList<DesplegableDTO> desplegableAsignaturas() {
+        String hql = "SELECT new dto.DesplegableDTO(a.id, a.nombre) FROM AsignaturasEntity a WHERE a.activo = 1";
+
+        SessionFactory factory = DBUtils.creadorSessionFactory();
+        Session s = factory.getCurrentSession();
+        s.beginTransaction();
+
+        Query<DesplegableDTO> query = s.createQuery(hql, DesplegableDTO.class);
+        List<DesplegableDTO> lista = query.getResultList();
+
+        s.getTransaction().commit();
+        s.close();
+
+        return new ArrayList<>(lista);
+    }
 
 }
