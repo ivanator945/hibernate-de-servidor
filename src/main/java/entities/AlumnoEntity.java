@@ -7,34 +7,32 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity 
+@Entity
 @Table(name = "alumnos")
 public class AlumnoEntity {
-	
+
 	@Id
-    @Column(name = "id")
-    private int id;
+	@Column(name = "id")
+	private int id;
 
-    @Column(name = "nombre")
-    private String nombre;
+	@Column(name = "nombre")
+	private String nombre;
 
-    @Column(name = "apellidos")
-    private String apellidos;
+	@Column(name = "apellidos")
+	private String apellidos;
 
-    /*@Column(name = "id_municipio")
-    private int idMunicipio; */
+	@Column(name = "familia_numerosa")
+	private int famNumerosa;
 
-    @Column(name = "familia_numerosa")
-    private int famNumerosa;
+	@Column(name = "activo")
+	private int activo;
 
-    @Column(name = "activo")
-    private int activo;
-    
-    @ManyToOne
-    @JoinColumn(name = "id_municipio")
-    private MunicipiosEntity municipio;
+	@ManyToOne
+	@JoinColumn(name = "id_municipio")
+	private MunicipiosEntity municipio;
 
-	public AlumnoEntity(int id, String nombre, String apellidos, int famNumerosa, int activo, MunicipiosEntity municipio) {
+	public AlumnoEntity(int id, String nombre, String apellidos, int famNumerosa, int activo,
+			MunicipiosEntity municipio) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -43,9 +41,9 @@ public class AlumnoEntity {
 		this.activo = activo;
 		this.municipio = municipio;
 	}
-	
-	 public AlumnoEntity() {
-	    }
+
+	public AlumnoEntity() {
+	}
 
 	public int getId() {
 		return id;
@@ -71,15 +69,6 @@ public class AlumnoEntity {
 		this.apellidos = apellidos;
 	}
 
-	/*
-	public int getIdMunicipio() {
-		return idMunicipio;
-	}
-
-	public void setIdMunicipio(int idMunicipio) {
-		this.idMunicipio = idMunicipio;
-	} */
-
 	public int getFamNumerosa() {
 		return famNumerosa;
 	}
@@ -98,14 +87,12 @@ public class AlumnoEntity {
 
 	public void setMunicipio(MunicipiosEntity municipio2) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public MunicipiosEntity getMunicipio() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-    
-    
 
 }

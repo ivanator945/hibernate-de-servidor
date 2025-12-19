@@ -16,18 +16,17 @@ public class DesplegablesDAOImplHib implements IDesplegableDAO {
 	@Override
 	public ArrayList<DesplegableDTO> desplegableMunicipios() {
 		String hql = "SELECT new dto.DesplegableDTO(m.idMunicipio, m.nombre) FROM MunicipiosEntity m";
-        
-        SessionFactory factory = DBUtils.creadorSessionFactory();
-        Session s = factory.getCurrentSession();
-        s.beginTransaction();
-        
-        Query<DesplegableDTO> query = s.createQuery(hql, DesplegableDTO.class);
-        List<DesplegableDTO> lista = query.getResultList();
 
+		SessionFactory factory = DBUtils.creadorSessionFactory();
+		Session s = factory.getCurrentSession();
+		s.beginTransaction();
 
-        s.close();
-        
-        return new ArrayList<>(lista);
+		Query<DesplegableDTO> query = s.createQuery(hql, DesplegableDTO.class);
+		List<DesplegableDTO> lista = query.getResultList();
+
+		s.close();
+
+		return new ArrayList<>(lista);
 	}
 
 	@Override

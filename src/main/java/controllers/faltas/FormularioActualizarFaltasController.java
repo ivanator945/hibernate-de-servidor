@@ -36,7 +36,7 @@ public class FormularioActualizarFaltasController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Cargar desplegables
+       
         DesplegableUtils.recuperarDesplegableAlumnos(request);
         DesplegableUtils.recuperarDesplegableAsignaturas(request);
 
@@ -45,7 +45,7 @@ public class FormularioActualizarFaltasController extends HttpServlet {
         String fecha = request.getParameter("fecha");
         String justificada = request.getParameter("justificada");
 
-        // Convertir justificada checkbox a int
+      
         int justificadaInt;
         if (justificada != null)
             justificadaInt = 1;
@@ -56,7 +56,6 @@ public class FormularioActualizarFaltasController extends HttpServlet {
 
         IFaltasService f = new FaltasServiceImp();
 
-        // Buscar con o sin fecha
         if (fecha == null || fecha.trim().isEmpty()) {
             listaFaltas = f.obtenerFaltasPorFiltrosSinFecha(nombreAlumno, asignatura, justificadaInt);
         } else {

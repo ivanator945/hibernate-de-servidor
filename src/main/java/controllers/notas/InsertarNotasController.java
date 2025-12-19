@@ -37,7 +37,7 @@ public class InsertarNotasController extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Cargar desplegables de alumnos y asignaturas
+       
         DesplegableUtils.recuperarDesplegableAlumnos(request);
         DesplegableUtils.recuperarDesplegableAsignaturas(request);
 
@@ -51,13 +51,13 @@ public class InsertarNotasController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Recuperamos los datos del formulario
+       
         String idAlumno = request.getParameter("alumno");
         String idAsignatura = request.getParameter("asignatura");
         String nota = request.getParameter("nota");
         String fecha = request.getParameter("fecha");
 
-        // Si no se introduce fecha, usar fecha actual
+       
         if (fecha == null || fecha.trim().isEmpty()) {
             fecha = LocalDate.now().toString();
             logger.info("Fecha no introducida, usando fecha actual: " + fecha);
@@ -68,7 +68,6 @@ public class InsertarNotasController extends HttpServlet {
 
         request.setAttribute("resultado", resultado);
 
-        // Recargar desplegables
         DesplegableUtils.recuperarDesplegableAlumnos(request);
         DesplegableUtils.recuperarDesplegableAsignaturas(request);
 

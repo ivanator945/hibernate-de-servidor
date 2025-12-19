@@ -23,31 +23,25 @@ public class MatriculacionesServiceImp implements IMatriculacionesService {
 		IAsignaturasDAO asignaturasDAO = new AsignaturasDAOImpl();
 		IAlumnosDAO alumnosDAO = new AlumnosDAOImpl();
 
-		// Obtener tasa base de la asignatura
 		double tasaBase = asignaturasDAO.obtenerTasaAsignatura(idAsignatura);
 
-		// Ver cuántas asignaturas tiene matriculadas el alumno
 		int numAsignaturasMatriculadas = alumnosDAO.contarAsignaturasMatriculadas(idAlumno);
 
-		// Verificar si el alumno es familia numerosa
 		boolean esFamiliaNumerosa = alumnosDAO.esFamiliaNumerosa(idAlumno);
 		logger.debug("Alumno " + idAlumno + " es familia numerosa: " + esFamiliaNumerosa);
 
-		// Aplicar lógica de negocio de descuentos
 		double tasaFinal = tasaBase;
 
-		// Descuento por número de asignaturas matriculadas
 		if (numAsignaturasMatriculadas >= 3 && numAsignaturasMatriculadas <= 5) {
-			tasaFinal = tasaFinal * 0.70; // 30% descuento
+			tasaFinal = tasaFinal * 0.70;
 			logger.debug("Aplicado descuento 30% (3-5 asignaturas): " + tasaFinal);
 		} else if (numAsignaturasMatriculadas >= 6) {
-			tasaFinal = tasaFinal * 0.50; // 50% descuento
+			tasaFinal = tasaFinal * 0.50;
 			logger.debug("Aplicado descuento 50% (6+ asignaturas): " + tasaFinal);
 		}
 
-		// Descuento adicional por familia numerosa
 		if (esFamiliaNumerosa) {
-			tasaFinal = tasaFinal * 0.50; // 50% adicional
+			tasaFinal = tasaFinal * 0.50;
 		}
 
 		logger.info(

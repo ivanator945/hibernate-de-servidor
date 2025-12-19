@@ -52,7 +52,7 @@ public class FormularioBorrarNotasController extends HttpServlet {
 
         INotasService n = new NotasServiceImp();
 
-        // Buscar sin filtros de id, nota y activo
+        
         if (fecha == null || fecha.trim().isEmpty()) {
             listaNotas = n.obtenerNotasPorFiltrosSinFecha("", nombreAlumno, asignatura, "", 1);
         } else {

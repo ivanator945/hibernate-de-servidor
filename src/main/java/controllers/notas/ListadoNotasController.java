@@ -67,7 +67,7 @@ public class ListadoNotasController extends HttpServlet {
         INotasService n = new NotasServiceImp();
         ArrayList<NotaDTO> listaNotas = new ArrayList<>();
 
-        // Si no se introduce fecha, usar método sin filtro de fecha
+       
         if (fecha == null || fecha.trim().isEmpty()) {
             listaNotas = n.obtenerNotasPorFiltrosSinFecha(idAlumno, nombreAlumno, asignatura, nota,
                     Integer.parseInt(activo));

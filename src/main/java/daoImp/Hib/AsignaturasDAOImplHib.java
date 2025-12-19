@@ -14,155 +14,139 @@ import utils.DBUtils;
 
 public class AsignaturasDAOImplHib implements IAsignaturasDAO {
 
-    @Override
-    public ArrayList<AsignaturaDTO> obtenerTodasAsignaturas() {
+	@Override
+	public ArrayList<AsignaturaDTO> obtenerTodasAsignaturas() {
 
-        String jpql = "SELECT new dto.AsignaturaDTO(a.id, a.nombre, a.curso, a.tasa, a.activo) "
-                + "FROM AsignaturasEntity a "
-                + "WHERE a.activo = 1";
+		String jpql = "SELECT new dto.AsignaturaDTO(a.id, a.nombre, a.curso, a.tasa, a.activo) "
+				+ "FROM AsignaturasEntity a " + "WHERE a.activo = 1";
 
-        SessionFactory factory = DBUtils.creadorSessionFactory();
-        Session s = factory.getCurrentSession();
-        s.beginTransaction();
+		SessionFactory factory = DBUtils.creadorSessionFactory();
+		Session s = factory.getCurrentSession();
+		s.beginTransaction();
 
-        Query<AsignaturaDTO> query = s.createQuery(jpql, AsignaturaDTO.class);
-        List<AsignaturaDTO> lista = query.getResultList();
+		Query<AsignaturaDTO> query = s.createQuery(jpql, AsignaturaDTO.class);
+		List<AsignaturaDTO> lista = query.getResultList();
 
-        s.getTransaction().commit();
-        s.close();
+		s.getTransaction().commit();
+		s.close();
 
-        return new ArrayList<>(lista);
-    }
+		return new ArrayList<>(lista);
+	}
 
+	@Override
+	public ArrayList<AsignaturaDTO> obtenerAsignaturasPorFiltros(String id, String nombre, String curso, String tasa,
+			int activo) {
 
+		String jpql = "SELECT new dto.AsignaturaDTO(a.id, a.nombre, a.curso, a.tasa, a.activo) "
+				+ "FROM AsignaturasEntity a " + "WHERE CAST(a.id AS string) LIKE :id " + "AND a.nombre LIKE :nombre "
+				+ "AND a.curso LIKE :curso " + "AND CAST(a.tasa AS string) LIKE :tasa " + "AND a.activo = :activo";
 
-    @Override
-    public ArrayList<AsignaturaDTO> obtenerAsignaturasPorFiltros(
-                String id, String nombre, String curso, String tasa, int activo) {
+		SessionFactory factory = DBUtils.creadorSessionFactory();
+		Session s = null;
 
-       
-        String jpql = "SELECT new dto.AsignaturaDTO(a.id, a.nombre, a.curso, a.tasa, a.activo) "
-                    + "FROM AsignaturasEntity a "
-                    + "WHERE CAST(a.id AS string) LIKE :id "
-                    + "AND a.nombre LIKE :nombre "
-                    + "AND a.curso LIKE :curso "
-                    + "AND CAST(a.tasa AS string) LIKE :tasa "
-                    + "AND a.activo = :activo";
+		try {
 
-        SessionFactory factory = DBUtils.creadorSessionFactory();
-        Session s = null; 
+			s = factory.openSession();
+			s.beginTransaction();
 
-        try {
-            
-            s = factory.openSession();
-            s.beginTransaction();
+			Query<AsignaturaDTO> query = s.createQuery(jpql, AsignaturaDTO.class).setParameter("id", "%" + id + "%")
+					.setParameter("nombre", "%" + nombre + "%").setParameter("curso", "%" + curso + "%")
+					.setParameter("tasa", "%" + tasa + "%").setParameter("activo", activo);
 
-            Query<AsignaturaDTO> query = s.createQuery(jpql, AsignaturaDTO.class)
-                    .setParameter("id", "%" + id + "%")
-                    .setParameter("nombre", "%" + nombre + "%")
-                    .setParameter("curso", "%" + curso + "%")
-                    .setParameter("tasa", "%" + tasa + "%")
-                    .setParameter("activo", activo);
+			List<AsignaturaDTO> lista = query.getResultList();
 
-            List<AsignaturaDTO> lista = query.getResultList();
+			s.getTransaction().commit();
 
-            s.getTransaction().commit();
+			return new ArrayList<>(lista);
 
-            return new ArrayList<>(lista);
+		} catch (Exception e) {
 
-        } catch (Exception e) {
-         
-            if (s != null && s.getTransaction().isActive()) {
-                s.getTransaction().rollback();
-            }
-            e.printStackTrace(); 
-            return new ArrayList<>();
-        } finally {
-        
-            if (s != null) {
-                s.close();
-            }
-        }
-    }
+			if (s != null && s.getTransaction().isActive()) {
+				s.getTransaction().rollback();
+			}
+			e.printStackTrace();
+			return new ArrayList<>();
+		} finally {
 
-    @Override
-    public int insertarAsignatura(String id, String nombre, String curso, String tasa, int activo) {
+			if (s != null) {
+				s.close();
+			}
+		}
+	}
 
-        SessionFactory factory = DBUtils.creadorSessionFactory();
-        Session s = factory.getCurrentSession();
-        s.beginTransaction();
+	@Override
+	public int insertarAsignatura(String id, String nombre, String curso, String tasa, int activo) {
 
-        
-        AsignaturasEntity a = new AsignaturasEntity(
-                nombre,
-                curso,
-                Double.parseDouble(tasa),
-                activo
-        );
+		SessionFactory factory = DBUtils.creadorSessionFactory();
+		Session s = factory.getCurrentSession();
+		s.beginTransaction();
 
-        Integer idPk = (Integer) s.save(a);
+		AsignaturasEntity a = new AsignaturasEntity(nombre, curso, Double.parseDouble(tasa), activo);
 
-        s.getTransaction().commit();
-        s.close();
+		Integer idPk = (Integer) s.save(a);
 
-        return idPk;
-    }
-    @Override
-    public int actualizarAsignatura(String id, String nombre, String curso, String tasa, int activo) {
+		s.getTransaction().commit();
+		s.close();
 
-        SessionFactory factory = DBUtils.creadorSessionFactory();
-        Session s = factory.getCurrentSession();
-        s.beginTransaction();
+		return idPk;
+	}
 
-        AsignaturasEntity a = s.find(AsignaturasEntity.class, Integer.parseInt(id));
+	@Override
+	public int actualizarAsignatura(String id, String nombre, String curso, String tasa, int activo) {
 
-        a.setNombre(nombre);
-        a.setCurso(curso);
-        a.setTasa(Double.parseDouble(tasa));
-        a.setActivo(activo);
+		SessionFactory factory = DBUtils.creadorSessionFactory();
+		Session s = factory.getCurrentSession();
+		s.beginTransaction();
 
-        s.update(a);
+		AsignaturasEntity a = s.find(AsignaturasEntity.class, Integer.parseInt(id));
 
-        s.getTransaction().commit();
-        s.close();
+		a.setNombre(nombre);
+		a.setCurso(curso);
+		a.setTasa(Double.parseDouble(tasa));
+		a.setActivo(activo);
 
-        return a.getId();
-    }
+		s.update(a);
 
-    @Override
-    public int borrarAsignatura(String id) {
+		s.getTransaction().commit();
+		s.close();
 
-        SessionFactory factory = DBUtils.creadorSessionFactory();
-        Session s = factory.getCurrentSession();
-        s.beginTransaction();
+		return a.getId();
+	}
 
-        AsignaturasEntity a = s.get(AsignaturasEntity.class, Integer.parseInt(id));
-        a.setActivo(0);
+	@Override
+	public int borrarAsignatura(String id) {
 
-        s.update(a);
-        s.getTransaction().commit();
-        s.close();
+		SessionFactory factory = DBUtils.creadorSessionFactory();
+		Session s = factory.getCurrentSession();
+		s.beginTransaction();
 
-        return a.getId();
-    }
+		AsignaturasEntity a = s.get(AsignaturasEntity.class, Integer.parseInt(id));
+		a.setActivo(0);
 
-    @Override
-    public double obtenerTasaAsignatura(String idAsignatura) {
+		s.update(a);
+		s.getTransaction().commit();
+		s.close();
 
-        String jpql = "SELECT a.tasa FROM AsignaturasEntity a WHERE a.id = :id AND a.activo = 1";
+		return a.getId();
+	}
 
-        SessionFactory factory = DBUtils.creadorSessionFactory();
-        Session s = factory.getCurrentSession();
-        s.beginTransaction();
+	@Override
+	public double obtenerTasaAsignatura(String idAsignatura) {
 
-        Query<Double> query = s.createQuery(jpql, Double.class);
-        query.setParameter("id", Integer.parseInt(idAsignatura));
+		String jpql = "SELECT a.tasa FROM AsignaturasEntity a WHERE a.id = :id AND a.activo = 1";
 
-        Double tasa = query.uniqueResult();
+		SessionFactory factory = DBUtils.creadorSessionFactory();
+		Session s = factory.getCurrentSession();
+		s.beginTransaction();
 
-        s.getTransaction().commit();
-        s.close();
+		Query<Double> query = s.createQuery(jpql, Double.class);
+		query.setParameter("id", Integer.parseInt(idAsignatura));
 
-        return (tasa != null) ? tasa : 0.0;
-    }
+		Double tasa = query.uniqueResult();
+
+		s.getTransaction().commit();
+		s.close();
+
+		return (tasa != null) ? tasa : 0.0;
+	}
 }

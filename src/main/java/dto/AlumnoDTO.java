@@ -8,8 +8,9 @@ public class AlumnoDTO {
 	private int idMunicipio;
 	private int familiaNumerosa;
 	private int activo;
-	
-	public AlumnoDTO(int id, String nombre, String apellido, String municipio, int idMunicipio, int familiaNumerosa, int activo) {
+
+	public AlumnoDTO(int id, String nombre, String apellido, String municipio, int idMunicipio, int familiaNumerosa,
+			int activo) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -19,7 +20,7 @@ public class AlumnoDTO {
 		this.familiaNumerosa = familiaNumerosa;
 		this.activo = activo;
 	}
-	
+
 	public AlumnoDTO(int id, String nombre, String apellido, String municipio) {
 		super();
 		this.id = id;
@@ -27,15 +28,13 @@ public class AlumnoDTO {
 		this.apellido = apellido;
 		this.municipio = municipio;
 	}
-	
+
 	public AlumnoDTO(int id, String nombre, String apellido) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
 	}
-	
-	//Getters, setters... 
 
 	public int getId() {
 		return id;
@@ -92,12 +91,5 @@ public class AlumnoDTO {
 	public void setActivo(int activo) {
 		this.activo = activo;
 	}
-	
-	
-	
-
-	
-	
-	
 
 }

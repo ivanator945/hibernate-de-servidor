@@ -3,11 +3,11 @@ package dto;
 public class DesplegableDTO {
 	private int id;
 	private String descripcion;
-	
+
 	public DesplegableDTO() {
 		super();
 	}
-	
+
 	public DesplegableDTO(int id, String descripcion) {
 		super();
 		this.id = id;
@@ -29,7 +29,5 @@ public class DesplegableDTO {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-	
-	
 
 }

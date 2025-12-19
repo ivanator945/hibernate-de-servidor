@@ -62,7 +62,7 @@ public class AsignaturasDAOImpl implements IAsignaturasDAO {
             ps.setString(2, "%" + nombre + "%");
             ps.setString(3, "%" + curso + "%");
 
-            // Si tasa está vacía, usar 0 como valor mínimo
+           
             if (tasa == null || tasa.trim().isEmpty()) {
                 ps.setDouble(4, 0);
             } else {

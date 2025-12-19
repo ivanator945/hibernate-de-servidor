@@ -19,55 +19,55 @@ import org.slf4j.LoggerFactory;
  */
 @WebServlet("/asignaturas/insertarAsignatura")
 public class InsertarAsignaturasController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private static Logger logger = LoggerFactory.getLogger(InsertarAsignaturasController.class);
+	private static final long serialVersionUID = 1L;
+	private static Logger logger = LoggerFactory.getLogger(InsertarAsignaturasController.class);
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public InsertarAsignaturasController() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public InsertarAsignaturasController() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
-    /**
-     * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-     *      response)
-     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        RequestDispatcher d = getServletContext()
-                .getRequestDispatcher("/WEB-INF/vistas/asignaturas/insertarAsignatura.jsp");
-        d.forward(request, response);
-    }
+		RequestDispatcher d = getServletContext()
+				.getRequestDispatcher("/WEB-INF/vistas/asignaturas/insertarAsignatura.jsp");
+		d.forward(request, response);
+	}
 
-    /**
-     * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-     *      response)
-     */
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // Recuperamos los datos del formulario
-        String id = request.getParameter("id");
-        String nombre = request.getParameter("nombre");
-        String curso = request.getParameter("curso");
-        String tasa = request.getParameter("tasa");
-        String activo = request.getParameter("activo");
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        if (activo != null)
-            activo = "1";
-        else
-            activo = "0";
+		String id = request.getParameter("id");
+		String nombre = request.getParameter("nombre");
+		String curso = request.getParameter("curso");
+		String tasa = request.getParameter("tasa");
+		String activo = request.getParameter("activo");
 
-        IAsignaturasService a = new AsignaturasServiceImp();
-        Integer resultado = a.insertarAsignatura(id, nombre, curso, tasa, Integer.parseInt(activo));
+		if (activo != null)
+			activo = "1";
+		else
+			activo = "0";
 
-        request.setAttribute("resultado", resultado);
+		IAsignaturasService a = new AsignaturasServiceImp();
+		Integer resultado = a.insertarAsignatura(id, nombre, curso, tasa, Integer.parseInt(activo));
 
-        RequestDispatcher d = getServletContext()
-                .getRequestDispatcher("/WEB-INF/vistas/asignaturas/insertarAsignatura.jsp");
-        d.forward(request, response);
-    }
+		request.setAttribute("resultado", resultado);
+
+		RequestDispatcher d = getServletContext()
+				.getRequestDispatcher("/WEB-INF/vistas/asignaturas/insertarAsignatura.jsp");
+		d.forward(request, response);
+	}
 
 }

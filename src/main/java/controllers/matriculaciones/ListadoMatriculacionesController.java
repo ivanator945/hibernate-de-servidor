@@ -66,7 +66,7 @@ public class ListadoMatriculacionesController extends HttpServlet {
         IMatriculacionesService m = new MatriculacionesServiceImp();
         ArrayList<MatriculacionDTO> listaMatriculaciones = new ArrayList<>();
 
-        // Si no se introduce fecha, usar método sin filtro de fecha
+       
         if (fecha == null || fecha.trim().isEmpty()) {
             listaMatriculaciones = m.obtenerMatriculacionesPorFiltrosSinFecha(nombreAsignatura, nombreAlumno,
                     Integer.parseInt(activo));

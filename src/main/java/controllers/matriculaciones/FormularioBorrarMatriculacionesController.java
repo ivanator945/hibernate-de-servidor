@@ -56,7 +56,7 @@ public class FormularioBorrarMatriculacionesController extends HttpServlet {
 
         IMatriculacionesService m = new MatriculacionesServiceImp();
 
-        // Buscar matriculaciones activas
+        
         if (fecha == null || fecha.trim().isEmpty()) {
             listaMatriculaciones = m.obtenerMatriculacionesPorFiltrosSinFecha(asignatura, nombreAlumno, 1);
         } else {

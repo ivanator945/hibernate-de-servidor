@@ -136,8 +136,7 @@ public class AlumnosDAOImpl implements IAlumnosDAO {
 
 	@Override
 	public int borrarAlumno(String id) {
-		String sql = "UPDATE alumnos SET activo = 0 "
-				+ "WHERE id = ? ";
+		String sql = "UPDATE alumnos SET activo = 0 " + "WHERE id = ? ";
 		Connection connection = DBUtils.conexion();
 		PreparedStatement ps;
 		Integer resultado = 0;

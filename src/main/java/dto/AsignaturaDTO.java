@@ -6,7 +6,7 @@ public class AsignaturaDTO {
 	private String curso;
 	private double tasa;
 	private int activo;
-	
+
 	public AsignaturaDTO(int id, String nombre, String curso, double tasa, int activo) {
 		super();
 		this.id = id;
@@ -15,21 +15,19 @@ public class AsignaturaDTO {
 		this.tasa = tasa;
 		this.activo = activo;
 	}
-	
+
 	public AsignaturaDTO(int id, String nombre, String curso) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.curso = curso;
 	}
-	
+
 	public AsignaturaDTO(int id, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 	}
-	
-	//Getters, setters...
 
 	public int getId() {
 		return id;

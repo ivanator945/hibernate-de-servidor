@@ -41,13 +41,13 @@ public class CalcularTasaController extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 // Obtener parámetros
-        String idAlumno = request.getParameter("alumnos"); // idAlumno
-        String idAsignatura = request.getParameter("asignaturas"); // idAsignatura
+		 
+        String idAlumno = request.getParameter("alumnos"); 
+        String idAsignatura = request.getParameter("asignaturas"); 
 
         logger.debug("Calculando tasa para alumno " + idAlumno + " en asignatura " + idAsignatura);
 
-        // Calcular tasa con lógica de negocio (Service)
+        
         IMatriculacionesService service = new MatriculacionesServiceImp();
         double tasaFinal = service.calcularTasa(idAlumno, idAsignatura);
 

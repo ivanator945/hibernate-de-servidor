@@ -47,7 +47,7 @@ public class FormularioActualizarNotasController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Cargar desplegables
+        
         DesplegableUtils.recuperarDesplegableAlumnos(request);
         DesplegableUtils.recuperarDesplegableAsignaturas(request);
 
@@ -59,7 +59,7 @@ public class FormularioActualizarNotasController extends HttpServlet {
 
         INotasService n = new NotasServiceImp();
 
-        // Buscar sin filtros de id, nota y activo (usar valores vacíos y activo=1)
+      
         if (fecha == null || fecha.trim().isEmpty()) {
             listaNotas = n.obtenerNotasPorFiltrosSinFecha("", nombreAlumno, asignatura, "", 1);
         } else {

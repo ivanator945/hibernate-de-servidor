@@ -35,14 +35,14 @@ public class ActualizarFaltasController extends HttpServlet {
         String fecha = request.getParameter("fecha");
         String justificada = request.getParameter("justificada");
 
-        // Convertir justificada checkbox a int
+       
         int justificadaInt;
         if (justificada != null)
             justificadaInt = 1;
         else
             justificadaInt = 0;
 
-        // Convertir fecha de YYYY-MM-DD a YYYYMMDD
+      
         String fechaFormateada = fecha.replace("-", "");
 
         IFaltasService f = new FaltasServiceImp();

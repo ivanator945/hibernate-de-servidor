@@ -31,7 +31,7 @@ public class InsertarFaltasController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Cargar desplegables de alumnos y asignaturas
+       
         DesplegableUtils.recuperarDesplegableAlumnos(request);
         DesplegableUtils.recuperarDesplegableAsignaturas(request);
 
@@ -41,26 +41,26 @@ public class InsertarFaltasController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Recuperamos los datos del formulario
+       
         String idAlumno = request.getParameter("alumno");
         String idAsignatura = request.getParameter("asignatura");
         String fecha = request.getParameter("fecha");
         String justificada = request.getParameter("justificada");
 
-        // Convertir justificada checkbox a int
+       
         int justificadaInt;
         if (justificada != null)
             justificadaInt = 1;
         else
             justificadaInt = 0;
 
-        // Si no se introduce fecha, usar fecha actual en formato YYYYMMDD
+        
         String fechaFormateada;
         if (fecha == null || fecha.trim().isEmpty()) {
             fechaFormateada = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
             logger.info("Fecha no introducida, usando fecha actual: " + fechaFormateada);
         } else {
-            // Convertir de YYYY-MM-DD a YYYYMMDD
+           
             fechaFormateada = fecha.replace("-", "");
         }
 
@@ -69,7 +69,7 @@ public class InsertarFaltasController extends HttpServlet {
 
         request.setAttribute("resultado", resultado);
 
-        // Recargar desplegables
+     
         DesplegableUtils.recuperarDesplegableAlumnos(request);
         DesplegableUtils.recuperarDesplegableAsignaturas(request);
 

@@ -14,26 +14,26 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "municipios")
 public class MunicipiosEntity {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    @Column(name = "id_municipio")
-    private int idMunicipio;
-    
-    @Column(name = "id_provincia")
-    private int idProvincia;
-    
-    @Column(name = "nombre")
-    private String nombre;
-    
-    @Column(name = "cod_municipio")
-    private String codMunicipio;
-    
-    @Column(name = "DC")
-    private String dc;
-    
-    @OneToMany(mappedBy = "municipio")
-    private List<AlumnoEntity> alumnos= new ArrayList<>();
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "id_municipio")
+	private int idMunicipio;
+
+	@Column(name = "id_provincia")
+	private int idProvincia;
+
+	@Column(name = "nombre")
+	private String nombre;
+
+	@Column(name = "cod_municipio")
+	private String codMunicipio;
+
+	@Column(name = "DC")
+	private String dc;
+
+	@OneToMany(mappedBy = "municipio")
+	private List<AlumnoEntity> alumnos = new ArrayList<>();
 
 	public MunicipiosEntity(int idMunicipio, int idProvincia, String nombre, String codMunicipio, String dc) {
 		super();
@@ -83,6 +83,5 @@ public class MunicipiosEntity {
 	public void setDc(String dc) {
 		this.dc = dc;
 	}
-    
-    
+
 }

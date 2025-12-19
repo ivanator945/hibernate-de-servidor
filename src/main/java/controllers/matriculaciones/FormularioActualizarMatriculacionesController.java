@@ -48,7 +48,7 @@ public class FormularioActualizarMatriculacionesController extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Cargar desplegables
+       
         DesplegableUtils.recuperarDesplegableAlumnos(request);
         DesplegableUtils.recuperarDesplegableAsignaturas(request);
 
@@ -60,7 +60,7 @@ public class FormularioActualizarMatriculacionesController extends HttpServlet {
 
         IMatriculacionesService m = new MatriculacionesServiceImp();
 
-        // Buscar matriculaciones activas
+       
         if (fecha == null || fecha.trim().isEmpty()) {
             listaMatriculaciones = m.obtenerMatriculacionesPorFiltrosSinFecha(asignatura, nombreAlumno, 1);
         } else {

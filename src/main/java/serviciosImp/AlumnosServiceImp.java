@@ -14,14 +14,15 @@ public class AlumnosServiceImp implements IAlumnosService {
 	@Override
 	public ArrayList<AlumnoDTO> obtenerAlumnos() throws SQLException {
 		IAlumnosDAO alumnos = new AlumnosDAOImpl();
-		
+
 		return alumnos.obtenerTodosAlumnos();
 	}
 
 	@Override
-	public ArrayList<AlumnoDTO> obtenerAlumnosPorIdNombreApellido(String id, String nombre, String apellido,int familiaNumerosa,  int activo) {
+	public ArrayList<AlumnoDTO> obtenerAlumnosPorIdNombreApellido(String id, String nombre, String apellido,
+			int familiaNumerosa, int activo) {
 		IAlumnosDAO alumnos = new AlumnosDAOImplHib();
-		return alumnos.obtenerAlumnosPorIdNombreApellido(id, nombre, apellido,   familiaNumerosa,  activo);
+		return alumnos.obtenerAlumnosPorIdNombreApellido(id, nombre, apellido, familiaNumerosa, activo);
 	}
 
 	@Override

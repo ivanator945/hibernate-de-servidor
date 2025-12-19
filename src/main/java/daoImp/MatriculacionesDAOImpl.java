@@ -217,7 +217,7 @@ public class MatriculacionesDAOImpl implements IMatriculacionesDAO {
 			if (filasActualizadas == 0)
 				throw new SQLException("Ha fallado la actualización de la matriculación");
 
-			// Actualizar caja
+			
 			PreparedStatement statement2 = connection.prepareStatement(sql2);
 			statement2.setString(1, tasa);
 			statement2.setString(2, id);

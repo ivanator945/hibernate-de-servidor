@@ -15,12 +15,6 @@ public class DBUtils {
 	
 
     private static SessionFactory sessionFactory; 
-    // Las variables estáticas son las que pertenecen a la clase y no al objeto.
-    // Es decir, esta variable es compartida por todos los objetos que
-    // se creen de esta clase
-
-    // Implementamos el patrón singleton, lo cual nos garantiza que solo haya un objeto creado de SessionFactory en nuestra app
-
     public static SessionFactory creadorSessionFactory() {
         if (sessionFactory == null) {
             try {

@@ -48,7 +48,7 @@ public class ListadoFaltasController extends HttpServlet {
 
         logger.info("Fecha recibida: " + fecha);
 
-        // Convertir justificada checkbox a int
+       
         int justificadaInt;
         if (justificada != null)
             justificadaInt = 1;
@@ -58,13 +58,11 @@ public class ListadoFaltasController extends HttpServlet {
         IFaltasService f = new FaltasServiceImp();
         ArrayList<FaltaDTO> listaFaltas = new ArrayList<>();
 
-        // Si no se introduce fecha, usar fecha del día actual en formato YYYY-MM-DD
+      
         if (fecha == null || fecha.trim().isEmpty()) {
-            String fechaActual = LocalDate.now().toString(); // Formato YYYY-MM-DD
+            String fechaActual = LocalDate.now().toString(); 
             listaFaltas = f.obtenerFaltasPorFiltros(nombreAlumno, asignatura, fechaActual, justificadaInt);
         } else {
-            // Usar fecha directamente (ya viene en formato YYYY-MM-DD del input
-            // type="date")
             listaFaltas = f.obtenerFaltasPorFiltros(nombreAlumno, asignatura, fecha, justificadaInt);
         }
 

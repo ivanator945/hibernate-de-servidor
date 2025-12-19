@@ -38,7 +38,7 @@ public class FormularioBorrarFaltasController extends HttpServlet {
         String fecha = request.getParameter("fecha");
         String justificada = request.getParameter("justificada");
 
-        // Convertir justificada checkbox a int
+       
         int justificadaInt;
         if (justificada != null)
             justificadaInt = 1;
@@ -49,7 +49,7 @@ public class FormularioBorrarFaltasController extends HttpServlet {
 
         IFaltasService f = new FaltasServiceImp();
 
-        // Buscar con o sin fecha
+      
         if (fecha == null || fecha.trim().isEmpty()) {
             listaFaltas = f.obtenerFaltasPorFiltrosSinFecha(nombreAlumno, asignatura, justificadaInt);
         } else {
